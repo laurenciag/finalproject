@@ -1,22 +1,36 @@
 package com.bcaf.lgd.finalproject.Entity;
 
+import org.hibernate.annotations.GenericGenerator;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class User {
-    public int id,roles;
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name="uuid2", strategy = "uuid2")
+    private String id;
+
+    public String roles;
     public String email,password,firstName,lastName,mobileNumber;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getRoles() {
+    public String getRoles() {
         return roles;
     }
 
-    public void setRoles(int roles) {
+    public void setRoles(String roles) {
         this.roles = roles;
     }
 

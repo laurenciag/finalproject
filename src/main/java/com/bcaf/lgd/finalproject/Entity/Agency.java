@@ -1,14 +1,27 @@
 package com.bcaf.lgd.finalproject.Entity;
 
-public class Agency {
-    public int id;
-    public String code,name,details,owner;
+import org.hibernate.annotations.GenericGenerator;
 
-    public int getId() {
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
+public class Agency {
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name="uuid2", strategy = "uuid2")
+    private String id;
+    public String owner;
+    public String code,agencyName,agencyDetails;
+
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -20,20 +33,20 @@ public class Agency {
         this.code = code;
     }
 
-    public String getName() {
-        return name;
+    public String getAgencyName() {
+        return agencyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAgencyName(String agencyName) {
+        this.agencyName = agencyName;
     }
 
-    public String getDetails() {
-        return details;
+    public String getAgencyDetails() {
+        return agencyDetails;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setAgencyDetails(String agencyDetails) {
+        this.agencyDetails = agencyDetails;
     }
 
     public String getOwner() {
