@@ -1,6 +1,7 @@
 package com.bcaf.lgd.finalproject.Entity;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,13 +10,13 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class Role {
+public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(generator = "uuid2")
     @GenericGenerator(name="uuid2", strategy = "uuid2")
-    public String id;
-    public String role;
+    private String id;
+    private String role;
 
     public String getId() {
         return id;
@@ -31,5 +32,10 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String getAuthority() {
+        return this.getRole();
     }
 }

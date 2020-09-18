@@ -16,8 +16,8 @@ public class Trip {
     @GenericGenerator(name="uuid2", strategy = "uuid2")
     public String id;
     public int fare;
-    public Date journeyDate;
-    private String sourceStop, destStop, bus, agency;
+    public String journeyDate;
+    private String sourceStopId, destStopId, busId, agency;
 
     public String getId() {
         return id;
@@ -35,28 +35,28 @@ public class Trip {
         this.fare = fare;
     }
 
-    public String getSourceStop() {
-        return sourceStop;
+    public String getSourceStopId() {
+        return sourceStopId;
     }
 
-    public void setSourceStop(String sourceStop) {
-        this.sourceStop = sourceStop;
+    public void setSourceStopId(String sourceStopId) {
+        this.sourceStopId = sourceStopId;
     }
 
-    public String getDestStop() {
-        return destStop;
+    public String getDestStopId() {
+        return destStopId;
     }
 
-    public void setDestStop(String destStop) {
-        this.destStop = destStop;
+    public void setDestStopId(String destStopId) {
+        this.destStopId = destStopId;
     }
 
-    public String getBus() {
-        return bus;
+    public String getBusId() {
+        return busId;
     }
 
-    public void setBus(String bus) {
-        this.bus = bus;
+    public void setBusId(String busId) {
+        this.busId = busId;
     }
 
     public String getAgency() {
@@ -67,11 +67,11 @@ public class Trip {
         this.agency = agency;
     }
 
-    public Date getJourneyDate() {
+    public String getJourneyDate() {
         return journeyDate;
     }
 
-    public void setJourneyDate(Date journeyDate) {
+    public void setJourneyDate(String journeyDate) {
         this.journeyDate = journeyDate;
     }
 }
