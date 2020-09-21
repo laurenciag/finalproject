@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface AgencyDAO extends JpaRepository<Agency, String> {
     @Query(nativeQuery = true, value = "SELECT * FROM agency WHERE owner =:id ")
     Agency getAgencyByUserId(@Param("id") String id);
+
 }

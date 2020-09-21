@@ -2,11 +2,9 @@ package com.bcaf.lgd.finalproject.Controller;
 
 import com.bcaf.lgd.finalproject.Entity.Agency;
 import com.bcaf.lgd.finalproject.Entity.User;
+import com.bcaf.lgd.finalproject.Request.JWToken;
 import com.bcaf.lgd.finalproject.command.SignUp;
-import com.bcaf.lgd.finalproject.dao.AgencyDAO;
-import com.bcaf.lgd.finalproject.dao.CreateJWT;
-import com.bcaf.lgd.finalproject.dao.RoleDAO;
-import com.bcaf.lgd.finalproject.dao.UserDAO;
+import com.bcaf.lgd.finalproject.dao.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -72,7 +70,7 @@ public class UserAPIController {
     }
 
     @PostMapping("/login")
-    public String login(String email, String password) throws JsonProcessingException{
+    public String login(@RequestParam String email, String password) throws JsonProcessingException{
         User user = userDAO.getEmail(email);
         Agency agency = agencyDAO.getAgencyByUserId(user.getId());
 
@@ -183,6 +181,74 @@ public class UserAPIController {
 
         ObjectMapper Obj = new ObjectMapper();
         String rs = Obj.writeValueAsString(user);
+        return rs;
+    }
+    
+    @GetMapping("/v1/checkEmailByUserId")
+    public String checkEmailByUserId(@RequestBody User us) throws JsonProcessingException{
+        User user = userDAO.findById(us.getEmail()).get();
+
+        ObjectMapper Obj = new ObjectMapper();
+        String rs = Obj.writeValueAsString(user);
+        return rs;
+    }
+
+    @PostMapping("user/login")
+    public String loginAndroid(@RequestParam String email,String password) throws JsonProcessingException{
+        User user = userDAO.getEmail(email);
+        String encoded = pass().encode(password);
+        System.out.println(encoded);
+        if(pass().matches(password,user.getPassword())){
+            ObjectMapper obj= new ObjectMapper();
+            Agency agency=agencyDAO.getAgencyByUserId(user.getId());
+            JWToken jwtoken = new JWToken();
+            jwtoken.setAgencyId(agency.getId());
+            jwtoken.setUserEmail(user.getEmail());
+            jwtoken.setUserId(user.getId());
+            jwtoken.setUserName(user.getFirstName()+" "+user.getLastName());
+            String iss = obj.writeValueAsString(jwtoken);
+            String JWT = new BuildJWT()
+                    .buildJWTAndro(user.getId(),iss,"login",1000000);
+            String rs = obj.writeValueAsString(JWT);
+            return rs;
+        }
+        else{
+            return "error";
+        }
+    }
+
+    @PostMapping("user/createUser")
+    public HttpStatus createAccountAndroid(@RequestBody SignUp signUp) throws JsonProcessingException{
+        User user = new User();
+        user.setFirstName(signUp.getFirstName());
+        user.setLastName(signUp.getLastName());
+        user.setEmail(signUp.getEmail());
+        user.setMobileNumber(signUp.getMobileNumber());
+        user.setRoles(roleDAO.getIdByRole("admin").getId());
+        user.setPassword(pass().encode(signUp.getPassword()));
+        userDAO.save(user);
+
+        return HttpStatus.OK;
+    }
+
+    @PostMapping("user/getUserById")
+    public String checkEmailFromUserId(@RequestParam String userId) throws JsonProcessingException{
+        User us = userDAO.findById(userId).get();
+
+        ObjectMapper Obj = new ObjectMapper();
+        String rs = Obj.writeValueAsString(us);
+        return rs;
+    }
+
+    @PostMapping("user/checkEmailUserByUser")
+    public String checkEmailByUserEmail(@RequestBody User user) throws JsonProcessingException{
+        User us = userDAO.getEmail(user.getEmail());
+
+        if(us == null)
+            us = new User();
+
+        ObjectMapper Obj = new ObjectMapper();
+        String rs = Obj.writeValueAsString(us);
         return rs;
     }
 }
