@@ -218,17 +218,19 @@ public class UserAPIController {
     }
 
     @PostMapping("user/createUser")
-    public HttpStatus createAccountAndroid(@RequestBody SignUp signUp) throws JsonProcessingException{
+    public String createAccountAndroid(@RequestBody User us) throws JsonProcessingException{
         User user = new User();
-        user.setFirstName(signUp.getFirstName());
-        user.setLastName(signUp.getLastName());
-        user.setEmail(signUp.getEmail());
-        user.setMobileNumber(signUp.getMobileNumber());
+        user.setFirstName(us.getFirstName());
+        user.setLastName(us.getLastName());
+        user.setEmail(us.getEmail());
+        user.setMobileNumber(us.getMobileNumber());
         user.setRoles(roleDAO.getIdByRole("admin").getId());
-        user.setPassword(pass().encode(signUp.getPassword()));
+        user.setPassword(pass().encode(us.getPassword()));
         userDAO.save(user);
 
-        return HttpStatus.OK;
+        ObjectMapper Obj = new ObjectMapper();
+        String rs = Obj.writeValueAsString(user);
+        return rs;
     }
 
     @PostMapping("user/getUserById")
