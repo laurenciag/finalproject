@@ -1,0 +1,54 @@
+-- MySQL dump 10.13  Distrib 8.0.21, for Win64 (x86_64)
+--
+-- Host: 127.0.0.1    Database: project_lgd
+-- ------------------------------------------------------
+-- Server version	8.0.21
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!50503 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `agency`
+--
+
+DROP TABLE IF EXISTS `agency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `agency` (
+  `id` varchar(255) NOT NULL,
+  `agency_details` varchar(255) DEFAULT NULL,
+  `agency_name` varchar(255) DEFAULT NULL,
+  `code` varchar(255) DEFAULT NULL,
+  `owner` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `agency`
+--
+
+LOCK TABLES `agency` WRITE;
+/*!40000 ALTER TABLE `agency` DISABLE KEYS */;
+INSERT INTO `agency` VALUES ('05908859-19ed-48d3-8356-921a8b9831dd',NULL,'',NULL,'d79f5982-c41f-4b62-ac53-55d4e6cbe025'),('63415491-f4c0-416f-bcbb-706a96487852','Finance','BCA',NULL,'bc57e700-669b-4cb3-83a6-8d56093d56f9'),('73c7f9a0-d476-4e2f-9429-bb7eb1054e3f',NULL,'',NULL,'1818e828-00a0-48f4-a803-524792ef4261'),('c4581c94-bc41-463a-8039-02efa0171e49',NULL,'',NULL,'829a02cb-c979-4ae4-a7f3-496da00e0204'),('c4f98a03-b96b-4399-b935-d60bed8ffb54',NULL,'',NULL,'7d01ef77-7460-4033-800e-ec79e3198f7a'),('f08946fb-241f-4d30-8116-73bee2f37ae9','zzzzzz','fdfdf',NULL,'4483c1c1-2cc9-4cec-ab6e-4f2b9323fb47'),('fd011aa9-9382-4b5f-98eb-b1ea59408426','Finance','BCA',NULL,'20a79c0b-5aa0-462c-8e6b-41f878765614');
+/*!40000 ALTER TABLE `agency` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2020-09-22  9:39:38
